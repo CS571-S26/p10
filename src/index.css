@@ -1,0 +1,339 @@
+/* Professional theme — Mechanical Gear Simulator */
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --bs-primary: #0f766e;
+  --bs-primary-rgb: 15, 118, 110;
+  --bs-primary-border-subtle: #0f766e;
+  --color-bg: #f8fafc;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-border-soft: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-muted-strong: #475569;
+  --color-primary: #0f766e;
+  --color-primary-hover: #0d9488;
+  --color-primary-light: #ccfbf1;
+  --color-accent: #0e7490;
+  --color-accent-light: #cffafe;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --nav-height: 4rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- Navbar ----- */
+.navbar-main {
+  min-height: var(--nav-height);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.navbar-main .navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: #fff !important;
+}
+
+.navbar-main .nav-link {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85) !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: var(--radius);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.navbar-main .nav-link:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-main .nav-link.active {
+  font-weight: 600;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.navbar-main .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+  padding: 0.35rem 0.5rem;
+}
+
+.navbar-main .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* ----- Main content ----- */
+#main-content {
+  flex: 1;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* ----- Page layout ----- */
+.page-title {
+  font-weight: 700;
+  font-size: 1.875rem;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+/* ----- Cards ----- */
+.app-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.app-card .card-header {
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-soft);
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+}
+
+.app-card .card-body {
+  padding: 1.25rem;
+}
+
+/* Result cards */
+.result-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+  height: 100%;
+  border-left: 3px solid var(--color-primary);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.result-card:hover {
+  box-shadow: var(--shadow-md);
+  border-left-color: var(--color-primary-hover);
+}
+
+.result-card .result-title {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.result-card .result-value {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.result-card .result-link {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.result-card .result-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Term / education cards */
+.term-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.term-card .card-header {
+  font-weight: 600;
+  background: linear-gradient(to right, var(--color-primary-light), transparent);
+  border-bottom: 1px solid var(--color-border-soft);
+  padding: 1rem 1.25rem;
+  color: var(--color-text);
+}
+
+.term-card .card-body {
+  padding: 1.25rem;
+}
+
+.term-card .card-body p {
+  margin-bottom: 0.75rem;
+  color: var(--color-text-muted-strong);
+}
+
+.term-card .card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ----- Form controls ----- */
+.form-control, .form-select {
+  border-radius: var(--radius);
+  border-color: var(--color-border);
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-sans);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* ----- Buttons ----- */
+.btn-primary {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  font-weight: 500;
+  border-radius: var(--radius);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover) !important;
+  border-color: var(--color-primary-hover) !important;
+}
+
+.btn-outline-primary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 500;
+  border-radius: var(--radius);
+}
+
+.btn-outline-primary:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+.btn-outline-secondary {
+  border-color: var(--color-border);
+  color: var(--color-text-muted-strong);
+  border-radius: var(--radius);
+}
+
+/* ----- Gear visualizer wrapper ----- */
+.gear-canvas-wrapper {
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.gear-canvas-wrapper canvas {
+  display: block;
+}
+
+/* ----- Section headings ----- */
+.section-heading {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+/* ----- Links ----- */
+a:not(.nav-link):not(.btn) {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:not(.nav-link):not(.btn):hover {
+  color: var(--color-primary-hover);
+}
+
+/* ----- Focus (accessibility) ----- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0.5rem;
+  z-index: 1050;
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 500;
+  font-family: var(--font-sans);
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ----- About page ----- */
+.about-lead {
+  font-size: 1.125rem;
+  color: var(--color-text-muted-strong);
+  margin-bottom: 1.5rem;
+}
+
+.about-body {
+  color: var(--color-text-muted-strong);
+  max-width: 42rem;
+}
