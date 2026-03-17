@@ -59,4 +59,174 @@ export const educationSections = [
       </>
     ),
   },
+  {
+    id: 'equations',
+    title: 'Equations (Gear Pair)',
+    content: (
+      <>
+        <p>
+          For two external gears in mesh, <strong>Gear 1</strong> is the <strong>driver</strong> and <strong>Gear 2</strong> is the{' '}
+          <strong>driven</strong>. Let tooth counts be <code>N₁</code>, <code>N₂</code>, pitch diameters be <code>d₁</code>, <code>d₂</code>,
+          angular velocities be <code>ω₁</code>, <code>ω₂</code>, and torques be <code>τ₁</code>, <code>τ₂</code>.
+        </p>
+        <ul className="equation-list">
+          <li className="equation-item">
+            <div className="equation-label">Geometry (same tooth size/module)</div>
+            <div className="equation-block" aria-label="d one over d two equals N one over N two">
+              <span className="equation-expr">
+                <span className="frac">
+                  <span className="num">
+                    <span className="math-var">
+                      d<sub>1</sub>
+                    </span>
+                  </span>
+                  <span className="den">
+                    <span className="math-var">
+                      d<sub>2</sub>
+                    </span>
+                  </span>
+                </span>
+                <span className="op">=</span>
+                <span className="frac">
+                  <span className="num">
+                    <span className="math-var">
+                      N<sub>1</sub>
+                    </span>
+                  </span>
+                  <span className="den">
+                    <span className="math-var">
+                      N<sub>2</sub>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </div>
+          </li>
+          <li className="equation-item">
+            <div className="equation-label">Speed (external gears rotate opposite)</div>
+            <div className="equation-block" aria-label="omega two equals negative N one over N two times omega one">
+              <span className="equation-expr">
+                <span className="math-var">
+                  ω<sub>2</sub>
+                </span>
+                <span className="op">=</span>
+                <span className="op">−</span>
+                <span className="op">(</span>
+                <span className="frac">
+                  <span className="num">
+                    <span className="math-var">
+                      N<sub>1</sub>
+                    </span>
+                  </span>
+                  <span className="den">
+                    <span className="math-var">
+                      N<sub>2</sub>
+                    </span>
+                  </span>
+                </span>
+                <span className="op">)</span>
+                <span className="op">·</span>
+                <span className="math-var">
+                  ω<sub>1</sub>
+                </span>
+              </span>
+            </div>
+          </li>
+          <li className="equation-item">
+            <div className="equation-label">Speed magnitude (same for RPM)</div>
+            <div className="equation-block" aria-label="magnitude omega two over magnitude omega one equals N one over N two">
+              <span className="equation-expr">
+                <span className="frac">
+                  <span className="num">
+                    |<span className="math-var">
+                      ω<sub>2</sub>
+                    </span>
+                    |
+                  </span>
+                  <span className="den">
+                    |<span className="math-var">
+                      ω<sub>1</sub>
+                    </span>
+                    |
+                  </span>
+                </span>
+                <span className="op">=</span>
+                <span className="frac">
+                  <span className="num">
+                    <span className="math-var">
+                      N<sub>1</sub>
+                    </span>
+                  </span>
+                  <span className="den">
+                    <span className="math-var">
+                      N<sub>2</sub>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </div>
+          </li>
+          <li className="equation-item">
+            <div className="equation-label">Torque (ideal, ignoring losses)</div>
+            <div className="equation-block" aria-label="tau two equals negative N two over N one times tau one">
+              <span className="equation-expr">
+                <span className="math-var">
+                  τ<sub>2</sub>
+                </span>
+                <span className="op">=</span>
+                <span className="op">−</span>
+                <span className="op">(</span>
+                <span className="frac">
+                  <span className="num">
+                    <span className="math-var">
+                      N<sub>2</sub>
+                    </span>
+                  </span>
+                  <span className="den">
+                    <span className="math-var">
+                      N<sub>1</sub>
+                    </span>
+                  </span>
+                </span>
+                <span className="op">)</span>
+                <span className="op">·</span>
+                <span className="math-var">
+                  τ<sub>1</sub>
+                </span>
+              </span>
+            </div>
+          </li>
+          <li className="equation-item">
+            <div className="equation-label">Power consistency (ideal)</div>
+            <div className="equation-block" aria-label="P equals tau omega and tau one omega one approximately equals tau two omega two">
+              <span className="equation-expr">
+                <span className="math-var">P</span>
+                <span className="op">=</span>
+                <span className="math-var">τ</span>
+                <span className="op">·</span>
+                <span className="math-var">ω</span>
+                <span className="op">,</span>
+                <span className="op">so</span>
+                <span className="math-var">
+                  τ<sub>1</sub>
+                </span>
+                <span className="op">·</span>
+                <span className="math-var">
+                  ω<sub>1</sub>
+                </span>
+                <span className="op">≈</span>
+                <span className="math-var">
+                  τ<sub>2</sub>
+                </span>
+                <span className="op">·</span>
+                <span className="math-var">
+                  ω<sub>2</sub>
+                </span>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </>
+    ),
+  },
 ]
