@@ -45,6 +45,17 @@ npm run build
 npm run preview
 ```
 
+### Publish to [sparasaram17.github.io/gear-project](https://sparasaram17.github.io/gear-project/)
+
+The course remote is `origin` (`CS571-S26/p10`). The **gear** remote points at [`sparasaram17/gear-project`](https://github.com/sparasaram17/gear-project) (GitHub Pages). After your work is committed on `main`:
+
+```bash
+git push gear main          # source
+npm run deploy:gear         # build + push dist/ to branch gh-pages on gear
+```
+
+`vite.config.js` uses `base: '/gear-project/'` for that URL. You need a GitHub identity with **push access** to `sparasaram17/gear-project`; if you see `403` / “denied to Shash23”, add your user as a collaborator on that repo or sign in with an account that has access (HTTPS credential or SSH).
+
 ## Project structure
 
 ```
