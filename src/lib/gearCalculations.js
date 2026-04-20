@@ -169,3 +169,80 @@ export function suggestGearPairsForRatio(targetRatio, opts = {}) {
   }
   return out
 }
+
+/**
+ * Estimate aggregate loss model for a simple external-gear train.
+ * Efficiency is applied per mesh and multiplied across meshes.
+ * @param {number[]} teethPerGear
+ * @param {number} stageEfficiency - e.g. 0.97 means 97% efficiency per mesh
+ * @returns {{
+ *   meshCount: number,
+ *   stageEfficiency: number,
+ *   totalEfficiency: number,
+ *   powerLossPercent: number,
+ * } | null}
+ */
+export function calculateEfficiencyLoss(teethPerGear, stageEfficiency) {
+  if (!Array.isArray(teethPerGear) || teethPerGear.length < 2) return null
+  if (teethPerGear.some((t) => typeof t !== 'number' || t <= 0 || !Number.isFinite(t))) return null
+  if (
+    typeof stageEfficiency !== 'number' ||
+    !Number.isFinite(stageEfficiency) ||
+    stageEfficiency <= 0 ||
+    stageEfficiency > 1
+  ) {
+    return null
+  }
+  const meshCount = teethPerGear.length - 1
+  const totalEfficiency = stageEfficiency ** meshCount
+  return {
+    meshCount,
+    stageEfficiency,
+    totalEfficiency,
+    powerLossPercent: (1 - totalEfficiency) * 100,
+  }
+}
+
+/**
+ * Build a compact summary for comparing different configurations.
+ * @param {{
+ *   teethList: number[],
+ *   drivingTeeth: number,
+ *   drivenTeeth: number,
+ *   drivingRpm: number,
+ *   moduleMm: number,
+ *   stageEfficiency: number,
+ * }} input
+ */
+export function buildSetupSummary(input) {
+  const { teethList, drivingTeeth, drivenTeeth, drivingRpm, moduleMm, stageEfficiency } = input
+  const primary = calculateGearRelations(drivingTeeth, drivenTeeth)
+  const train = calculateGearTrain(teethList)
+  const loss = calculateEfficiencyLoss(teethList, stageEfficiency)
+
+  const drivenRpm =
+    primary && typeof drivingRpm === 'number' && Number.isFinite(drivingRpm) && drivingRpm !== 0
+      ? drivingRpm * (drivingTeeth / drivenTeeth)
+      : null
+
+  const idealTorqueFactor = primary ? primary.gearRatio : null
+  const lossAdjustedTorqueFactor =
+    idealTorqueFactor != null && loss ? idealTorqueFactor * loss.totalEfficiency : null
+
+  return {
+    teethList: Array.isArray(teethList) ? teethList : [],
+    drivingTeeth,
+    drivenTeeth,
+    drivingRpm,
+    moduleMm,
+    stageEfficiency,
+    gearRatio: primary?.gearRatio ?? null,
+    speedRatio: primary?.speedRatio ?? null,
+    trainRatio: train?.totalRatio ?? null,
+    drivenRpm,
+    idealTorqueFactor,
+    lossAdjustedTorqueFactor,
+    totalEfficiency: loss?.totalEfficiency ?? null,
+    powerLossPercent: loss?.powerLossPercent ?? null,
+  }
+}

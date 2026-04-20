@@ -10,6 +10,8 @@ A web-based educational tool for calculating and visualizing mechanical gear rel
 - **Gear train analysis** — Table of each gear’s **teeth, signed RPM, and relative torque** along the train (ideal constant-power model)
 - **Design checks** — Educational warnings (low tooth count, extreme single-stage ratio) and optional **module** (mm) for **center distance** between adjacent meshing pairs
 - **Reverse calculator** — Enter a target tooth ratio; get suggested integer driver/driven pairs, with **Use for driver / driven** to apply
+- **Compare mode (A/B)** — Save two setups and compare train, RPM, ratio, efficiency, loss, and torque-side outputs side-by-side
+- **Efficiency / friction model** — Set per-mesh stage efficiency (0–1) and view total efficiency and aggregate power loss across the train
 - **PDF export** — **Download PDF report** bundles inputs, primary-pair calculations, train totals, per-gear analysis table, center distances (when module is set), and design-check notes
 - **Live visualization** — Animated meshing gears; supports two gears or a full gear train (add/remove gears)
 - **Terminology** — Definitions for gear ratio, speed ratio, torque, and pitch circle

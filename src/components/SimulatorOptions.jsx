@@ -5,6 +5,8 @@ export default function SimulatorOptions({
   onDrivingRpmChange,
   moduleMm,
   onModuleMmChange,
+  stageEfficiency,
+  onStageEfficiencyChange,
 }) {
   return (
     <Card className="mb-4 app-card">
@@ -48,6 +50,27 @@ export default function SimulatorOptions({
               />
               <Form.Text id="module-mm-desc" className="text-muted">
                 For center distance between adjacent gears: a = m/2 × (N₁ + N₂).
+              </Form.Text>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group>
+              <Form.Label htmlFor="stage-efficiency">Stage efficiency per mesh (0–1)</Form.Label>
+              <Form.Control
+                id="stage-efficiency"
+                type="number"
+                min={0.01}
+                max={1}
+                step="any"
+                value={stageEfficiency}
+                onChange={(e) => {
+                  const v = parseFloat(e.target.value, 10)
+                  if (!Number.isNaN(v) && v > 0 && v <= 1) onStageEfficiencyChange(v)
+                }}
+                aria-describedby="stage-efficiency-desc"
+              />
+              <Form.Text id="stage-efficiency-desc" className="text-muted">
+                Models friction/losses; total efficiency multiplies across meshes.
               </Form.Text>
             </Form.Group>
           </Col>

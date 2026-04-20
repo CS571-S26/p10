@@ -1,12 +1,9 @@
+import { Button, Card } from 'react-bootstrap'
 import { useGearState } from '../context/GearStateContext'
 import PageLayout from '../components/PageLayout'
 import GearInputForm from '../components/GearInputForm'
-import SimulatorOptions from '../components/SimulatorOptions'
 import ResultsPanel from '../components/ResultsPanel'
 import GearCanvas from '../components/GearCanvas'
-import GearTrainTable from '../components/GearTrainTable'
-import DesignWarnings from '../components/DesignWarnings'
-import ReverseRatioPanel from '../components/ReverseRatioPanel'
 import ExportPdfButton from '../components/ExportPdfButton'
 
 export default function CalculatorPage() {
@@ -18,25 +15,43 @@ export default function CalculatorPage() {
     gears,
     setGears,
     drivingRpm,
-    setDrivingRpm,
     moduleMm,
-    setModuleMm,
+    stageEfficiency,
+    saveCurrentAsSetupA,
+    saveCurrentAsSetupB,
+    resetSimulator,
   } = useGearState()
-
   const teethList = gears.map((g) => g.teeth)
-
-  const applyPair = (driver, driven) => {
-    setDrivingTeeth(driver)
-    setDrivenTeeth(driven)
-    setGears([{ teeth: driver }, { teeth: driven }])
-  }
 
   return (
     <PageLayout
-      title="Gear Simulator"
+      title="Simulator"
       titleId="calculator-page-heading"
-      subtitle="Enter driving and driven gear tooth counts to compute ratio, speed, and torque. Adjust parameters below to update the visualization."
+      subtitle="Quickly set up driver and driven gears, then read the key outputs. Use Analyze for deeper engineering checks and Compare for A/B workflows."
     >
+      <Card className="mb-4 app-card quick-actions-card">
+        <Card.Header as="h2">Quick actions</Card.Header>
+        <Card.Body className="d-flex gap-2 flex-wrap align-items-center">
+          <Button type="button" variant="outline-secondary" onClick={resetSimulator}>
+            Reset
+          </Button>
+          <Button type="button" variant="outline-primary" onClick={saveCurrentAsSetupA}>
+            Save A
+          </Button>
+          <Button type="button" variant="outline-primary" onClick={saveCurrentAsSetupB}>
+            Save B
+          </Button>
+          <ExportPdfButton
+            teethList={teethList}
+            drivingTeeth={drivingTeeth}
+            drivenTeeth={drivenTeeth}
+            drivingRpm={drivingRpm}
+            moduleMm={moduleMm}
+            stageEfficiency={stageEfficiency}
+            className="mb-0"
+          />
+        </Card.Body>
+      </Card>
       <h2 className="section-heading">Live Gear Visualization</h2>
       <GearCanvas gears={gears} />
       <GearInputForm
@@ -54,27 +69,13 @@ export default function CalculatorPage() {
         }}
         showTrainEditor
       />
-      <SimulatorOptions
-        drivingRpm={drivingRpm}
-        onDrivingRpmChange={setDrivingRpm}
-        moduleMm={moduleMm}
-        onModuleMmChange={setModuleMm}
-      />
-      <ReverseRatioPanel onApplyPair={applyPair} />
-      <GearTrainTable teethList={teethList} inputRpm={drivingRpm} />
-      <DesignWarnings teethList={teethList} moduleMm={moduleMm} />
       <ResultsPanel
         drivingTeeth={drivingTeeth}
         drivenTeeth={drivenTeeth}
         gears={gears}
         drivingRpm={drivingRpm}
-      />
-      <ExportPdfButton
-        teethList={teethList}
-        drivingTeeth={drivingTeeth}
-        drivenTeeth={drivenTeeth}
-        drivingRpm={drivingRpm}
-        moduleMm={moduleMm}
+        stageEfficiency={stageEfficiency}
+        compact
       />
     </PageLayout>
   )

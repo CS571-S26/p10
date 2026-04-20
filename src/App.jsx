@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { GearStateProvider } from './context/GearStateContext'
 import NavBar from './components/NavBar'
 import CalculatorPage from './pages/CalculatorPage'
+import AnalyzePage from './pages/AnalyzePage'
+import ComparePage from './pages/ComparePage'
 import LearnPage from './pages/LearnPage'
 import AboutPage from './pages/AboutPage'
 
@@ -14,6 +16,8 @@ function App() {
           <Routes>
             <Route path="/" element={<CalculatorPage />} />
             <Route path="/visualizer" element={<Navigate to="/" replace />} />
+            <Route path="/analyze" element={<AnalyzePage />} />
+            <Route path="/compare" element={<ComparePage />} />
             <Route path="/learn" element={<LearnPage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>

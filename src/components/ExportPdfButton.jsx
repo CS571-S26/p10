@@ -7,6 +7,8 @@ export default function ExportPdfButton({
   drivenTeeth,
   drivingRpm,
   moduleMm,
+  stageEfficiency,
+  className = 'mb-3',
 }) {
   const [loading, setLoading] = useState(false)
 
@@ -20,6 +22,7 @@ export default function ExportPdfButton({
         drivenTeeth,
         drivingRpm,
         moduleMm,
+        stageEfficiency,
       })
     } finally {
       setLoading(false)
@@ -30,7 +33,7 @@ export default function ExportPdfButton({
     <Button
       type="button"
       variant="outline-dark"
-      className="mb-3"
+      className={className}
       onClick={handleClick}
       disabled={loading}
       aria-busy={loading}

@@ -3,6 +3,7 @@ import autoTable from 'jspdf-autotable'
 import {
   calculateGearRelations,
   calculateGearTrain,
+  calculateEfficiencyLoss,
   computeGearTrainAnalysis,
   centerDistanceMm,
   getDesignWarnings,
@@ -21,10 +22,18 @@ function fmt(n, decimals = 4) {
  *   drivenTeeth: number,
  *   drivingRpm: number,
  *   moduleMm: number,
+ *   stageEfficiency?: number,
  * }} params
  */
 export function downloadGearReportPdf(params) {
-  const { teethList, drivingTeeth, drivenTeeth, drivingRpm, moduleMm } = params
+  const {
+    teethList,
+    drivingTeeth,
+    drivenTeeth,
+    drivingRpm,
+    moduleMm,
+    stageEfficiency = 0.97,
+  } = params
 
   const doc = new jsPDF({ unit: 'mm', format: 'a4' })
   const pageW = doc.internal.pageSize.getWidth()
@@ -52,6 +61,8 @@ export function downloadGearReportPdf(params) {
   doc.text(`Driving RPM (gear 1): ${fmt(drivingRpm, 4)}`, margin, y)
   y += 5
   doc.text(`Module m: ${fmt(moduleMm, 3)} mm`, margin, y)
+  y += 5
+  doc.text(`Stage efficiency per mesh: ${fmt(stageEfficiency, 4)}`, margin, y)
   y += 10
 
   const rel = calculateGearRelations(drivingTeeth, drivenTeeth)
@@ -85,6 +96,7 @@ export function downloadGearReportPdf(params) {
 
   if (teethList.length >= 2) {
     const train = calculateGearTrain(teethList)
+    const loss = calculateEfficiencyLoss(teethList, stageEfficiency)
     if (train) {
       doc.setFontSize(12)
       doc.text('Gear train (overall)', margin, y)
@@ -93,6 +105,11 @@ export function downloadGearReportPdf(params) {
       doc.text(`Total ratio (product of stage ratios): ${fmt(train.totalRatio)}`, margin, y)
       y += 5
       doc.text(`Output RPM factor vs gear 1: ${fmt(train.outputRpmFactor)}`, margin, y)
+      y += 5
+      if (loss) {
+        doc.text(`Total efficiency: ${fmt(loss.totalEfficiency)} (${fmt(loss.powerLossPercent, 2)}% loss)`, margin, y)
+        y += 5
+      }
       y += 8
     }
   }

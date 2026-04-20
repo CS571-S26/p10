@@ -69,7 +69,7 @@ function drawGear(ctx, cx, cy, radius, teeth, rotation) {
   ctx.restore()
 }
 
-export default function GearCanvas({ gears }) {
+export default function GearCanvas({ gears, height = 280, animate = true }) {
   const canvasRef = useRef(null)
   const animRef = useRef(0)
   const rotationRef = useRef(0)
@@ -113,6 +113,11 @@ export default function GearCanvas({ gears }) {
   }, [draw])
 
   useEffect(() => {
+    if (!animate) {
+      rotationRef.current = 0
+      draw()
+      return undefined
+    }
     const tick = () => {
       rotationRef.current += 0.02
       draw()
@@ -120,7 +125,7 @@ export default function GearCanvas({ gears }) {
     }
     animRef.current = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(animRef.current)
-  }, [draw])
+  }, [draw, animate])
 
   if (!gears || gears.length === 0) {
     return (
@@ -131,11 +136,11 @@ export default function GearCanvas({ gears }) {
   }
 
   return (
-    <div className="gear-canvas-wrapper border rounded bg-light" style={{ minHeight: 280 }}>
+    <div className="gear-canvas-wrapper border rounded bg-light" style={{ minHeight: height }}>
       <canvas
         ref={canvasRef}
         className="w-100"
-        style={{ display: 'block', width: '100%', height: 280 }}
+        style={{ display: 'block', width: '100%', height }}
         aria-label="Live animation of meshing gears rotating according to the calculated gear ratio"
         role="img"
       />
