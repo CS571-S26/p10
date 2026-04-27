@@ -1,92 +1,83 @@
+# Live Website: [https://sparasaram17.github.io/gear-project/](https://sparasaram17.github.io/gear-project/)
+
 # Mechanical Gear Simulator and Calculator
 
-A web-based educational tool for calculating and visualizing mechanical gear relationships. Built for students in introductory engineering courses who want to explore gear ratio, speed ratio, torque, and how tooth count affects motion.
+Web-based educational tool for introductory engineering students to model, visualize, and compare gear setups.
 
-## Features
+## What This Project Includes
 
-- **Simulator** — Enter driving and driven gear tooth counts (8–120 teeth) to compute:
-  - Gear ratio, speed ratio, torque ratio
-  - Driven RPM at your chosen **driving RPM** (gear 1), not only at 1 RPM
-- **Gear train analysis** — Table of each gear’s **teeth, signed RPM, and relative torque** along the train (ideal constant-power model)
-- **Design checks** — Educational warnings (low tooth count, extreme single-stage ratio) and optional **module** (mm) for **center distance** between adjacent meshing pairs
-- **Reverse calculator** — Enter a target tooth ratio; get suggested integer driver/driven pairs, with **Use for driver / driven** to apply
-- **Compare mode (A/B)** — Save two setups and compare train, RPM, ratio, efficiency, loss, and torque-side outputs side-by-side
-- **Efficiency / friction model** — Set per-mesh stage efficiency (0–1) and view total efficiency and aggregate power loss across the train
-- **PDF export** — **Download PDF report** bundles inputs, primary-pair calculations, train totals, per-gear analysis table, center distances (when module is set), and design-check notes
-- **Live visualization** — Animated meshing gears; supports two gears or a full gear train (add/remove gears)
-- **Terminology** — Definitions for gear ratio, speed ratio, torque, and pitch circle
-- **Responsive, accessible UI** — React Bootstrap layout, keyboard-friendly forms, skip link, and WCAG-oriented contrast and labels
+- **Task-based pages:** `Simulator`, `Analyze`, `Compare`, `Learn`, and `About`.
+- **Core calculations:** gear ratio, speed ratio, torque factor, driven RPM.
+- **Multi-gear train support:** add/remove gears and compute cumulative behavior.
+- **Engineering analysis:** train table, design checks, module-based spacing, and efficiency/loss model.
+- **A/B comparison workflow:** save setups, compare deltas, and apply saved setups back to simulator.
+- **PDF export:** downloadable report of inputs and computed outputs.
+- **Accessibility support:** labeled inputs, keyboard-friendly forms, skip link, and WCAG-oriented contrast updates.
 
-## Tech stack
+## Tech Stack
 
-- **React 18** + **Vite 5**
-- **React Router** (multi-page: Simulator, Terminology, About) with **HashRouter** for static hosting
-- **React Bootstrap** (layout, forms, cards, nav)
-- No backend — all calculation and animation run in the browser.
+- `React 18`
+- `Vite 5`
+- `react-router-dom` (HashRouter for GitHub Pages)
+- `react-bootstrap` + `bootstrap`
+- `jsPDF` + `jspdf-autotable`
 
-## Getting started
+## Local Development
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or later recommended)
-- npm (included with Node)
+- Node.js (v18+ recommended)
+- npm
 
-### Install and run
+### Run Locally
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server (http://localhost:5173)
 npm run dev
+```
 
-# Build for production
+### Production Build
+
+```bash
 npm run build
-
-# Preview production build locally
 npm run preview
 ```
 
-### Publish to [sparasaram17.github.io/gear-project](https://sparasaram17.github.io/gear-project/)
+## Deployment
 
-The course remote is `origin` (`CS571-S26/p10`). The **gear** remote points at [`sparasaram17/gear-project`](https://github.com/sparasaram17/gear-project) (GitHub Pages).
+This project is deployed to GitHub Pages at:
 
-After you **commit** your work on `main`, one command pushes both repos and updates the live site:
+- [https://sparasaram17.github.io/gear-project/](https://sparasaram17.github.io/gear-project/)
 
-```bash
-npm run ship
-```
+Useful scripts:
 
-That runs `git push` to `origin` and `gear`, then builds and publishes `dist/` to the `gh-pages` branch on `gear`.
+- `npm run deploy:gear` - build and publish to `gh-pages` for the `gear` remote
+- `npm run push:all` - push `main` to both `origin` and `gear`
+- `npm run ship` - push both remotes, then deploy GitHub Pages
 
-- **`npm run push:all`** — only push both remotes (no build; use when you only changed non-frontend files or already deployed).
-- **`npm run deploy:gear`** — only build + publish to GitHub Pages (if code is already pushed).
+`vite.config.js` uses `base: '/gear-project/'` to match GitHub Pages hosting.
 
-`vite.config.js` uses `base: '/gear-project/'` for that URL. You need **push access** to `sparasaram17/gear-project` (HTTPS or SSH credentials).
+## Repository Structure
 
-## Project structure
-
-```
+```text
 src/
-  components/     # NavBar, GearInputForm, SimulatorOptions, GearTrainTable, DesignWarnings, ReverseRatioPanel, ResultsPanel, GearCanvas, etc.
-  context/        # GearStateContext (gears, driving RPM, module)
-  data/           # Education content (terminology copy)
-  lib/            # gearCalculations.js, gearGeometry.js, pdfExport.js
-  pages/          # CalculatorPage, LearnPage, AboutPage
-  App.jsx
-  main.jsx
-  index.css
+  components/   Reusable UI (forms, tables, cards, nav, visualization, compare)
+  context/      Shared simulator state and setup persistence
+  data/         Learning content
+  lib/          Gear math, geometry, and PDF export logic
+  pages/        CalculatorPage, AnalyzePage, ComparePage, LearnPage, AboutPage
 public/
-  vite.svg        # Favicon
+  vite.svg
 ```
 
-## Credits
+## Team
 
-- **Shashwat Ghevde** ([@Shash23](https://github.com/Shash23))
-- **Sri Parasaram** ([@sparasaram17](https://github.com/sparasaram17))
+- Shashwat Ghevde ([@Shash23](https://github.com/Shash23))
+- Sri Parasaram ([@sparasaram17](https://github.com/sparasaram17))
 
-CS571 Web Project 10.
+CS571 Web Project 10
 
-## Change history
+## Additional Notes
 
-A detailed list of features and file-level notes is in [CHANGELOG.md](CHANGELOG.md).
+- Change history: [CHANGELOG.md](CHANGELOG.md)
+- Original project proposal/context: [project_description.md](project_description.md)

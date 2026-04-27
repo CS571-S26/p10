@@ -10,7 +10,7 @@
   --color-border: #d8e1ec;
   --color-border-soft: #e9eff7;
   --color-text: #122033;
-  --color-text-muted: #516176;
+  --color-text-muted: #45566d;
   --color-text-muted-strong: #34465d;
   --color-primary: #0f4c81;
   --color-primary-hover: #0c3d69;
@@ -315,6 +315,10 @@ body {
   color: var(--color-text);
 }
 
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
 /* ----- Buttons ----- */
 .btn-primary {
   background: var(--color-primary) !important;
@@ -423,7 +427,8 @@ body {
 /* ----- Links ----- */
 a:not(.nav-link):not(.btn) {
   color: var(--color-primary);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
   font-weight: 500;
 }
 
